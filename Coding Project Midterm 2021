@@ -1,0 +1,33 @@
+const int ledPin = 9;  //variable which stores pin number
+const int buzzPin = 11; //variable which stores pin number
+const int ldrPin = A2;  //variable which stores pin number
+
+void setup () {
+Serial.begin(9600);
+   pinMode(9, OUTPUT);  // configure digital pin 9 as an output
+   pinMode(11, OUTPUT);  // configure digital pin 11 as an output
+   pinMode(A2, INPUT);  // configure digital pin A2 as an input
+}
+
+void loop() {
+int ldrStatus = analogRead(ldrPin);  //read and save value from sensor
+
+  if (ldrStatus >= 400) {  //if it is light
+  tone(buzzPin, 100);  //Buzzer make sound
+  digitalWrite(ledPin, HIGH);  //turn on LED
+  delay(50);  
+  noTone(buzzPin);
+
+  digitalWrite(ledPin, LOW);   
+  delay(50);
+  Serial.println("Its Bright");
+
+}
+
+else {
+  noTone(buzzPin); //Stop buzzer sound
+  digitalWrite(ledPin, LOW); //Turn off LED
+  Serial.println("Its Dark");
+}
+
+}
